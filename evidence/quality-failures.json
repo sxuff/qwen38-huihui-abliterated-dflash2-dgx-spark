@@ -1,0 +1,38 @@
+{
+  "candidate_quality_passes": 24,
+  "candidate_rows": 27,
+  "failures": [
+    {
+      "completion_tokens": 75,
+      "content": "A smaller draft model rapidly generates multiple candidate tokens to propose a sequence of future outputs. The larger target model then verifies these candidates in a single parallel pass, accepting the longest prefix that matches its own predictions. This process significantly increases throughput by reducing the number of sequential target-model steps required, while ensuring the final output is identical to what the target model would have produced alone.",
+      "content_sha256": "50d99496d8843e20690dc1ffd6c793ca663c720196e20bcbcfe3a6cd6741a3dd",
+      "finish_reason": "stop",
+      "fixture_id": "prose",
+      "quality_detail": "A smaller draft model rapidly generates multiple candidate tokens to propose a sequence of future outputs. The larger target model then verifies these candidates in a single parallel pass, accepting the longest prefix that matches its own predictions. This process significantly increases throughput by reducing the number of sequential target-model steps required, while ensuring the final output is identical to what the target model would have produced alone.",
+      "repetition": 0
+    },
+    {
+      "completion_tokens": 75,
+      "content": "A smaller draft model rapidly generates multiple candidate tokens to propose a sequence of future outputs. The larger target model then verifies these candidates in a single parallel pass, accepting the longest prefix that matches its own predictions. This process significantly increases throughput by reducing the number of sequential target-model steps required, while ensuring the final output is identical to what the target model would have produced alone.",
+      "content_sha256": "50d99496d8843e20690dc1ffd6c793ca663c720196e20bcbcfe3a6cd6741a3dd",
+      "finish_reason": "stop",
+      "fixture_id": "prose",
+      "quality_detail": "A smaller draft model rapidly generates multiple candidate tokens to propose a sequence of future outputs. The larger target model then verifies these candidates in a single parallel pass, accepting the longest prefix that matches its own predictions. This process significantly increases throughput by reducing the number of sequential target-model steps required, while ensuring the final output is identical to what the target model would have produced alone.",
+      "repetition": 1
+    },
+    {
+      "completion_tokens": 75,
+      "content": "A smaller draft model rapidly generates multiple candidate tokens to propose a sequence of future outputs. The larger target model then verifies these candidates in a single parallel pass, accepting the longest prefix that matches its own predictions. This process significantly increases throughput by reducing the number of sequential target-model steps required, while ensuring the final output is identical to what the target model would have produced alone.",
+      "content_sha256": "50d99496d8843e20690dc1ffd6c793ca663c720196e20bcbcfe3a6cd6741a3dd",
+      "finish_reason": "stop",
+      "fixture_id": "prose",
+      "quality_detail": "A smaller draft model rapidly generates multiple candidate tokens to propose a sequence of future outputs. The larger target model then verifies these candidates in a single parallel pass, accepting the longest prefix that matches its own predictions. This process significantly increases throughput by reducing the number of sequential target-model steps required, while ensuring the final output is identical to what the target model would have produced alone.",
+      "repetition": 2
+    }
+  ],
+  "historical_quality_passes": 23,
+  "historical_rows": 27,
+  "note": "Exact failed outputs are included so the frozen checker decisions remain inspectable. Scores are not relabeled post hoc.",
+  "schema_version": 1,
+  "study_id": "qwen38-huihui-radixark-abliterated-nvfp4-lmhead-dflash2-gb10-v3"
+}

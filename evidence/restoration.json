@@ -1,0 +1,60 @@
+{
+  "passed": true,
+  "post_study": {
+    "canary": {
+      "content": "RESTORED_AFTER_CANDIDATE",
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 8,
+        "prompt_tokens": 22,
+        "prompt_tokens_details": null,
+        "reasoning_tokens": 0,
+        "total_tokens": 30
+      }
+    },
+    "expected_model": "qwen38-27b-ara-abliterated-nvfp4-mtp",
+    "models": {
+      "data": [
+        {
+          "created": 1788028214,
+          "id": "qwen38-27b-ara-abliterated-nvfp4-mtp",
+          "max_model_len": 262144,
+          "object": "model",
+          "owned_by": "sglang",
+          "parent": null,
+          "root": "qwen38-27b-ara-abliterated-nvfp4-mtp"
+        }
+      ],
+      "object": "list"
+    }
+  },
+  "pre_study": {
+    "canary": {
+      "content": "PRE_STUDY_SERVICE_OK",
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 7,
+        "prompt_tokens": 21,
+        "prompt_tokens_details": null,
+        "reasoning_tokens": 0,
+        "total_tokens": 28
+      }
+    },
+    "expected_model": "qwen38-27b-ara-abliterated-nvfp4-mtp",
+    "models": {
+      "data": [
+        {
+          "created": 1788027604,
+          "id": "qwen38-27b-ara-abliterated-nvfp4-mtp",
+          "max_model_len": 262144,
+          "object": "model",
+          "owned_by": "sglang",
+          "parent": null,
+          "root": "qwen38-27b-ara-abliterated-nvfp4-mtp"
+        }
+      ],
+      "object": "list"
+    }
+  },
+  "schema_version": 1
+}

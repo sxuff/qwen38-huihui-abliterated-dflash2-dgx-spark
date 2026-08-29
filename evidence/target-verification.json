@@ -1,0 +1,127 @@
+{
+  "complete": true,
+  "extra": [],
+  "files": [
+    {
+      "bytes": 1570,
+      "name": ".gitattributes",
+      "passed": true,
+      "sha256": "34448b82c17d60fec9b65b1f093c115ddbaadc04beb1b0140b6bfed2e012a930"
+    },
+    {
+      "bytes": 314067,
+      "name": ".quant_summary.txt",
+      "passed": true,
+      "sha256": "d26d811637f10e39361e103a70cfaae99182c4ff68a5c6d3d226718d487ac04b"
+    },
+    {
+      "bytes": 1285,
+      "name": "README.md",
+      "passed": true,
+      "sha256": "0982e7346a689ded055b424ce8d785acf87b951420b6a2c47aab231f39da72ea"
+    },
+    {
+      "bytes": 8952,
+      "name": "chat_template.jinja",
+      "passed": true,
+      "sha256": "c3cf9e34abf4f9e36c2d72165aa9c132d3e2a725b6c2586aaa3a8af9d7a81041"
+    },
+    {
+      "bytes": 87619,
+      "name": "config.json",
+      "passed": true,
+      "sha256": "6e6fb6989aae4ab99281ae45446eedcb2da382f11a0475a983e6a9793ac010d2"
+    },
+    {
+      "bytes": 471,
+      "name": "conversion-manifest.local.json",
+      "passed": true,
+      "sha256": "1de589d7bce947092d4ae5d70c7065dd2ddb3e9d6f09f7479447e479fca64149"
+    },
+    {
+      "bytes": 202,
+      "name": "generation_config.json",
+      "passed": true,
+      "sha256": "e70c136c1b78ddc1fb0905bac8e733a4dc448d4f852a5dd75143fffc70be550e"
+    },
+    {
+      "bytes": 53749,
+      "name": "hf_quant_config.json",
+      "passed": true,
+      "sha256": "0f39e8cd23abdfb79adc89ac1b19acad990aa6ac32973f9ab0a67d1e3449535c"
+    },
+    {
+      "bytes": 3353259,
+      "name": "merges.txt",
+      "passed": true,
+      "sha256": "a9d356d7bdf1ef4949e3e748e95b8e10ad9d4e2e838eddc38a0a7b6b94d1db8d"
+    },
+    {
+      "bytes": 9965653936,
+      "name": "model-00001-of-00003.safetensors",
+      "passed": true,
+      "sha256": "2dd1fab188684f97d8a236887abbec79a47dfefd58acfba11958f6248ab26df9"
+    },
+    {
+      "bytes": 9985759152,
+      "name": "model-00002-of-00003.safetensors",
+      "passed": true,
+      "sha256": "6abd8c5a6643a09497d29106505565c5291c2bda9bba153fe089923c02608294"
+    },
+    {
+      "bytes": 1970287896,
+      "name": "model-00003-of-00003.safetensors",
+      "passed": true,
+      "sha256": "db8d565a03b7918cb7299e676be44ca91a5fb54a39f9a73bfe82229857fef228"
+    },
+    {
+      "bytes": 218030,
+      "name": "model.safetensors.index.json",
+      "passed": true,
+      "sha256": "dd0819091f577a42b0467161c7dd70251d3f2b7b887f1358dc8992ddfa532f97"
+    },
+    {
+      "bytes": 390,
+      "name": "preprocessor_config.json",
+      "passed": true,
+      "sha256": "27225450ac9c6529872ee1924fcb0962ff5634834f817040f444118116f4e516"
+    },
+    {
+      "bytes": 1191,
+      "name": "processor_config.json",
+      "passed": true,
+      "sha256": "d89ef49ce9cd37fbf510158e13c1ef063d9286411c1ec9049932dbe0487143b1"
+    },
+    {
+      "bytes": 12809320,
+      "name": "tokenizer.json",
+      "passed": true,
+      "sha256": "0997f410c57a1f4e53b09e4be8f4a172d90edd9564368fb0847030937229b9f3"
+    },
+    {
+      "bytes": 17928,
+      "name": "tokenizer_config.json",
+      "passed": true,
+      "sha256": "b11349aafa7cdc6a320767cf7ceb29ed82f7eda5d65e8e0819e76f0ce947bf27"
+    },
+    {
+      "bytes": 385,
+      "name": "video_preprocessor_config.json",
+      "passed": true,
+      "sha256": "7768af27c1fafa9cc9011c1dc20067e03f8915e03b63504550e11d5066986d13"
+    },
+    {
+      "bytes": 6722759,
+      "name": "vocab.json",
+      "passed": true,
+      "sha256": "ce99b4cb2983d118806ce0a8b777a35b093e2000a503ebde25853284c9dfa003"
+    }
+  ],
+  "missing": [],
+  "repository": "edp1096/Huihui-RadixArk-Qwen3.8-27B-abliterated-NVFP4",
+  "revision": "21565d389fe573a32c1c425e0c7ade204ddb2263",
+  "root_files": 19,
+  "schema_version": 1,
+  "verified_bytes": 21945292161,
+  "verified_files": 19
+}

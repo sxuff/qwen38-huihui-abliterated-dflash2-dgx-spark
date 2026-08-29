@@ -1,0 +1,15 @@
+[Unit]
+Description=Authenticated bridge proxy for Huihui-RadixArk DFlash2
+After=qwen38-huihui-radixark-dflash2.service
+Requires=qwen38-huihui-radixark-dflash2.service
+PartOf=qwen38-huihui-radixark-dflash2.service
+Conflicts=qwen38-abliterated-dflash2-proxy.service
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/qwen38-auth-proxy-service.sh
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=default.target

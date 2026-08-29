@@ -6,7 +6,23 @@ The candidate quantizes the `lm_head` and all 192 language-model MLP projections
 
 ## Status
 
-**V3 collection pending.** The protocol, candidate revision, historical control, exact historical runtime image ID, fixtures, response-model receipts, finite-denominator checks, measured DFlash counter deltas, and promotion gates are frozen before the candidate arm is run.
+**Promotion gate passed.** The exact historical runtime image, lineage-bound v3 collector, and all frozen gates produced **57.95 tok/s**, versus **41.44 tok/s** for the current Aday DFlash2 control.
+
+![Measured result](assets/qwen38-huihui-radixark-result.png)
+
+| | Current Aday DFlash2 | Huihui-RadixArk DFlash2 |
+|---|---:|---:|
+| Median whole-request rate | 41.44 tok/s | **57.95 tok/s** |
+| Frozen automatic quality | 23/27 | **24/27** |
+
+- Historical-control ratio: **1.40×**
+- Runtime errors: **0/27**
+- Exact response-model identity: **27/27**
+- Normalized payload matches: **27/27**
+- Measured DFlash verification-call delta: **1,310**
+- Final draft acceptance: **57.86%**, acceptance length **5.05**
+- Minimum host `MemAvailable`: **27.76 GiB**
+- Swap growth: **0 bytes**
 
 Only the fast DFlash2 arm will be collected. The control is the completed, output-redacted Aday DFlash2 arm from [`sxuff/qwen38-27b-abliterated-nvfp4-dflash2-dgx-spark`](https://github.com/sxuff/qwen38-27b-abliterated-nvfp4-dflash2-dgx-spark), pinned in [`controls/aday-dflash2-control.json`](controls/aday-dflash2-control.json).
 
@@ -72,7 +88,20 @@ RUN_ROOT="$PWD/private/primary" \
 ./scripts/run_study.sh
 ```
 
-The runner temporarily stops the current Aday model, launches the candidate under a disjoint study-owned container name, collects only `candidate-dflash2`, then restores and generation-tests the previous authenticated service regardless of pass or failure. Promotion is a separate step.
+The runner temporarily stops the current Aday model, launches the candidate under a disjoint study-owned container name, collects only `candidate-dflash2`, then restores and generation-tests the previous authenticated service regardless of pass or failure. Promotion is a separate, reversible step.
+
+## Install the qualified service
+
+The benchmark used the exact historical runtime image. Production uses the separately verified candidate-labeled image with an identical executable root filesystem.
+
+```bash
+QWEN38_PROXY_KEY_FILE="$HOME/.config/qwen38/proxy.key" ./scripts/install_service.sh
+systemctl --user enable --now \
+  qwen38-huihui-radixark-dflash2.service \
+  qwen38-huihui-radixark-dflash2-proxy.service
+```
+
+SGLang binds only to `127.0.0.1:8002`. The Docker-bridge client endpoint at `172.17.0.1:8001` requires bearer authentication.
 
 ## Metric
 
