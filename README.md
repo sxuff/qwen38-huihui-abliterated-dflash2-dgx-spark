@@ -49,7 +49,7 @@ The full contract is in [`protocol.json`](protocol.json).
 - Behavioral source: `huihui-ai/Huihui-Qwen3.8-27B-abliterated`
 - DFlash2 draft: `z-lab/Qwen3.8-27B-DFlash2@50307d4c4cde6860d4eee73e2547cd786fe8e8a4`
 - Benchmark runtime image: exact historical control `sha256:d551df08e966aee2fbac67c231f4c7dfad291b02d3b5e59f082f753c85cd33dd`
-- Candidate-labeled deployment image, used only after qualification: `sha256:b1dc79ca75f22c3f12e53cd096880a116ca80bcd97a66dab151dc78170831512`
+- Candidate-labeled image built as an attribution check: `sha256:b1dc79ca75f22c3f12e53cd096880a116ca80bcd97a66dab151dc78170831512`. The qualified service deliberately reuses the exact benchmark image above so runtime identity remains matched.
 - Hardware: one NVIDIA DGX Spark GB10
 
 ## Precision policy
@@ -92,7 +92,7 @@ The runner temporarily stops the current Aday model, launches the candidate unde
 
 ## Install the qualified service
 
-The benchmark used the exact historical runtime image. Production uses the separately verified candidate-labeled image with an identical executable root filesystem.
+Benchmark and production use the exact historical runtime image. Its executable root filesystem is identical to the candidate-labeled image; target identity is instead enforced through the hash-verified mounted checkpoint, served-model receipt, and deployment canaries.
 
 ```bash
 QWEN38_PROXY_KEY_FILE="$HOME/.config/qwen38/proxy.key" ./scripts/install_service.sh

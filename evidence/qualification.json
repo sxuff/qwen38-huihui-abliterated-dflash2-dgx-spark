@@ -1,6 +1,6 @@
 {
   "benchmark_runtime_image_id": "sha256:d551df08e966aee2fbac67c231f4c7dfad291b02d3b5e59f082f753c85cd33dd",
-  "candidate_deployment_image_id": "sha256:b1dc79ca75f22c3f12e53cd096880a116ca80bcd97a66dab151dc78170831512",
+  "candidate_deployment_image_id": "sha256:d551df08e966aee2fbac67c231f4c7dfad291b02d3b5e59f082f753c85cd33dd",
   "candidate_quality_passes": 24,
   "candidate_tps": 57.94819602426378,
   "claim_boundary": "The candidate and historical control use the exact same runtime image ID, DFlash2 draft, fixtures, sampler, request count, and payload fields after removing only the required model identifier. They were collected in separate sessions, so this is not a paired same-session comparison and does not isolate run-order or environmental drift.",
