@@ -6,7 +6,8 @@ Before=qwen38-huihui-radixark-dflash2-proxy.service
 Conflicts=qwen38-abliterated-dflash2.service qwen38-dflash2.service qwen38-flash-next-q3.service qwen38-aday-vllm.service
 
 [Service]
-Type=simple
+Type=oneshot
+RemainAfterExit=yes
 ExecStart=%h/.local/bin/qwen38-huihui-radixark-dflash2-service.sh
 ExecStop=/usr/bin/docker stop -t 45 qwen38-huihui-radixark-nvfp4
 TimeoutStartSec=1200
