@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "image_tag": "sxuff/qwen38-huihui-radixark-dflash2:2026-08-29",
+  "image_id": "sha256:b1dc79ca75f22c3f12e53cd096880a116ca80bcd97a66dab151dc78170831512",
+  "build_cache_reused": true,
+  "labels": {
+    "io.sxuff.sglang.base_commit": "c4271c3fe1262fc2adbd162c33b25de5255251c5",
+    "io.sxuff.dflash.donor_commit": "c14312a66420b75ca9a11bf1817c4db1fa26b097",
+    "io.sxuff.dflash.compat_overlay_commit": "c90d8c34cf795185ee8de736b7ded9bca3fe0de1",
+    "io.sxuff.target_revision": "21565d389fe573a32c1c425e0c7ade204ddb2263",
+    "io.sxuff.draft_revision": "50307d4c4cde6860d4eee73e2547cd786fe8e8a4"
+  },
+  "verification": {
+    "overlay_python_compilation": "passed",
+    "build_exit_code": 0
+  }
+}

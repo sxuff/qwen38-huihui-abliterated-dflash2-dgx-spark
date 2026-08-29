@@ -1,0 +1,36 @@
+{
+  "base_model": "huihui-ai/Huihui-Qwen3.8-27B-abliterated",
+  "conclusion": "The pinned artifact uses ModelOpt NVFP4 W4A4 for lm_head and every language-model MLP, FP8 for attention/Gated DeltaNet projections, and retains BF16 vision and MTP tensors.",
+  "excluded_modules": [
+    "mtp*",
+    "mtp.layers.0*"
+  ],
+  "lm_head_index_keys": [
+    "lm_head.input_scale",
+    "lm_head.weight",
+    "lm_head.weight_scale",
+    "lm_head.weight_scale_2"
+  ],
+  "lm_head_policy": {
+    "group_size": 16,
+    "quant_algo": "NVFP4"
+  },
+  "model_index_metadata": {
+    "total_parameters": 18164649200,
+    "total_size": 21921428200
+  },
+  "mtp_index_key_count": 15,
+  "quant_method": "modelopt",
+  "quantized_layer_counts": {
+    "FP8": 208,
+    "NVFP4": 193
+  },
+  "repository": "edp1096/Huihui-RadixArk-Qwen3.8-27B-abliterated-NVFP4",
+  "revision": "21565d389fe573a32c1c425e0c7ade204ddb2263",
+  "schema_version": 1,
+  "source_file_sha256": {
+    "config.json": "6e6fb6989aae4ab99281ae45446eedcb2da382f11a0475a983e6a9793ac010d2",
+    "hf_quant_config.json": "0f39e8cd23abdfb79adc89ac1b19acad990aa6ac32973f9ab0a67d1e3449535c",
+    "model.safetensors.index.json": "dd0819091f577a42b0467161c7dd70251d3f2b7b887f1358dc8992ddfa532f97"
+  }
+}

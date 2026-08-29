@@ -1,0 +1,92 @@
+{
+  "acceptance": {
+    "complete_rows": 27,
+    "maximum_swap_growth_bytes": 536870912,
+    "minimum_measured_spec_verify_call_delta": 1,
+    "minimum_median_speed_ratio_vs_historical_control": 1.1,
+    "minimum_mem_available_bytes": 16106127360,
+    "minimum_quality_passes": 23,
+    "minimum_spec_accept_length": 1.000001,
+    "minimum_spec_accept_rate": 1e-06,
+    "minimum_spec_verify_calls": 1,
+    "normalized_payload_hashes_must_match_historical_control": true,
+    "required_finish_reasons": [
+      "stop",
+      "tool_calls"
+    ],
+    "required_finite_performance_rows": 18,
+    "required_positive_completion_token_rows": 27,
+    "runtime_errors_allowed": 0
+  },
+  "arms": {
+    "candidate-dflash2": {
+      "compatibility_overlay_commit": "c90d8c34cf795185ee8de736b7ded9bca3fe0de1",
+      "draft_model": "z-lab/Qwen3.8-27B-DFlash2",
+      "draft_revision": "50307d4c4cde6860d4eee73e2547cd786fe8e8a4",
+      "draft_tokens": 8,
+      "overlay_source_commit": "c14312a66420b75ca9a11bf1817c4db1fa26b097",
+      "runtime_base_commit": "c4271c3fe1262fc2adbd162c33b25de5255251c5"
+    }
+  },
+  "claim_boundary": "The candidate and historical control use the exact same runtime image ID, DFlash2 draft, fixtures, sampler, request count, and payload fields after removing only the required model identifier. They were collected in separate sessions, so this is not a paired same-session comparison and does not isolate run-order or environmental drift.",
+  "design": "one new DFlash2 arm compared with a frozen historical DFlash2 control",
+  "hardware": "single NVIDIA DGX Spark GB10",
+  "historical_control": {
+    "median_end_to_end_completion_tokens_per_second": 41.43505141917612,
+    "path": "controls/aday-dflash2-control.json",
+    "performance_rows": 18,
+    "quality_passes": 23,
+    "rows": 27,
+    "sha256": "ddadc7aa396a101c9e42d3bc167acde049d461667c8b03d63bc802521ef18e6e",
+    "target": "aday777/Qwen3.8-27B-ARA-abliterated-NVFP4-MTP",
+    "target_revision": "16b43988bddfbe3ae0fd172c02c4ad9099c678de"
+  },
+  "metric_definition": "end_to_end_completion_tokens_per_second is completion tokens divided by whole request wall time, including prefill and first-token latency",
+  "primary_performance_fixtures": [
+    "copy_python",
+    "copy_json",
+    "code",
+    "json",
+    "math",
+    "prose"
+  ],
+  "quality_fixtures": [
+    "literal",
+    "copy_python",
+    "copy_json",
+    "code",
+    "json",
+    "math",
+    "prose",
+    "reasoning",
+    "tool"
+  ],
+  "request_contract": {
+    "arm_order": [
+      "candidate-dflash2"
+    ],
+    "include_usage": true,
+    "repetitions_per_fixture": 3,
+    "seed": 17,
+    "stream": true,
+    "temperature": 0,
+    "top_p": 1
+  },
+  "runtime_control": {
+    "candidate_deployment_image_id": "sha256:b1dc79ca75f22c3f12e53cd096880a116ca80bcd97a66dab151dc78170831512",
+    "deployment_image_executable_rootfs_matches_control": true,
+    "historical_and_candidate_image_id": "sha256:d551df08e966aee2fbac67c231f4c7dfad291b02d3b5e59f082f753c85cd33dd"
+  },
+  "schema_version": 1,
+  "study_id": "qwen38-huihui-radixark-abliterated-nvfp4-lmhead-dflash2-gb10-v3",
+  "target": {
+    "attention": "FP8",
+    "lm_head": "NVFP4 W4A4 group size 16",
+    "model": "edp1096/Huihui-RadixArk-Qwen3.8-27B-abliterated-NVFP4",
+    "mtp": "BF16",
+    "revision": "21565d389fe573a32c1c425e0c7ade204ddb2263",
+    "verified_bytes": 21945292161,
+    "verified_files": 19,
+    "vision": "BF16"
+  }
+}

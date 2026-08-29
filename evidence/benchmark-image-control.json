@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "historical_control_image_id": "sha256:d551df08e966aee2fbac67c231f4c7dfad291b02d3b5e59f082f753c85cd33dd",
+  "candidate_labeled_image_id": "sha256:b1dc79ca75f22c3f12e53cd096880a116ca80bcd97a66dab151dc78170831512",
+  "rootfs_equal": true,
+  "rootfs_layer_count": 88,
+  "non_label_image_config_equal": true,
+  "only_intended_config_difference": "OCI labels, including io.sxuff.target_revision",
+  "study_decision": "Use the exact historical-control image ID for v3 collection. Use the candidate-labeled image only for post-qualification deployment.",
+  "historical_image_target_label": "16b43988bddfbe3ae0fd172c02c4ad9099c678de",
+  "candidate_image_target_label": "21565d389fe573a32c1c425e0c7ade204ddb2263"
+}
