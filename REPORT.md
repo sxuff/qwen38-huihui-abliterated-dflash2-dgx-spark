@@ -13,8 +13,6 @@ The no-spec follow-up used the exact qualified image, checkpoint, fixture bytes,
 
 ## DFlash2 evidence
 
-- Draft acceptance rate: **57.86%**
-- Mean committed tokens per target verification: **5.05**
 - Measured verification-call delta across the DFlash arm: **1,310**
 - Complete requests: **27/27 per arm**
 - Automatic quality: **24/27 in both modes**
@@ -25,8 +23,6 @@ The no-spec follow-up used the exact qualified image, checkpoint, fixture bytes,
 - Runtime errors: **0 in both modes**
 - Maximum swap growth: **0 bytes in both measured arms**
 - No-spec launch receipt: no speculative algorithm or draft-model flags
-
-With eight configured DFlash tokens, seven are draft proposals. The measured acceptance rate corresponds to 4.05 accepted draft tokens plus one target bonus token per verification step. Acceptance is an efficiency diagnostic, not a quality score.
 
 The equal 24/27 quality totals are aggregate checker outcomes, not a parity claim. Only 9/27 canonical assembled assistant envelopes matched byte-for-byte across the separately collected arms. The exact definition and component counts are in [`evidence/huihui-cross-arm-parity.json`](evidence/huihui-cross-arm-parity.json).
 

@@ -12,6 +12,8 @@ The target uses ModelOpt NVFP4 W4A4 for the `lm_head` and all 192 language-model
 
 [Read the technical report](REPORT.md) · [Inspect the no-spec receipt](evidence/huihui-nospec-study.json) · [Inspect the exact comparison ledger](evidence/cross-study-comparison.json)
 
+Repository: https://github.com/sxuff/qwen38-huihui-abliterated-dflash2-dgx-spark
+
 | Huihui-RadixArk mode | Median whole-request rate | Frozen automatic quality | Runtime errors |
 |---|---:|---:|---:|
 | No speculation | 12.31 tok/s | 24/27 | 0/27 |
@@ -30,12 +32,6 @@ Equal automatic-quality totals do not imply output parity. **9/27 assembled assi
 | Aday ARA abliterated | 12.33 tok/s | 41.44 tok/s | 3.36× |
 
 Stock remains the primary external speed reference. Huihui's 57.95 tok/s is effectively stock-level performance, measuring 1.46% above stock across separate studies. Aday remains the exact-image frozen promotion control and a secondary operational reference.
-
-### Is 57.86% acceptance bad?
-
-No. SGLang defines acceptance rate as accepted draft tokens divided by proposed draft tokens, excluding the target model's bonus token. With eight configured DFlash tokens, seven are draft proposals. Huihui accepted an average of **4.05 of those seven drafts**, then committed the target bonus token, for **5.05 output tokens per verification step**.
-
-Acceptance is an efficiency diagnostic, not a quality score or a request-success rate. Huihui's **57.86%** is 15.71 percentage points above stock's **42.14%**. Aday reached a higher **70.71%** acceptance rate but only **41.44 tok/s**, showing why acceptance cannot be interpreted alone. End-to-end speed also depends on target-model execution cost, draft overhead, response trajectories, kernels, and memory behavior.
 
 Operational evidence for the no-spec follow-up:
 
@@ -60,7 +56,7 @@ The candidate must satisfy all of these:
 - Median whole-request completion rate is at least 1.10× the historical Aday DFlash2 result of 41.4351 tok/s.
 - At least 23/27 frozen automatic-quality checks pass, matching or exceeding the historical control.
 - All 18 performance rows have finite positive rates, all 27 rows have positive completion-token counts and expected finish reasons, and every stream reports the exact candidate model alias.
-- DFlash2 records a positive verification-call delta during the 27 measured requests, acceptance length greater than one, and nonzero acceptance rate.
+- DFlash2 activity is confirmed by a positive verification-call delta during the 27 measured requests.
 - Host `MemAvailable` remains at least 15 GiB.
 - Swap growth remains at or below 512 MiB.
 

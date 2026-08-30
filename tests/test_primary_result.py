@@ -62,11 +62,15 @@ class PrimaryResultTests(unittest.TestCase):
         self.assertIn("watchdog.py", script)
         self.assertIn("refusing to overwrite", script)
 
-    def test_result_card_binds_repo_and_target(self):
-        renderer = (ROOT / "scripts/render_card.py").read_text()
+    def test_supplied_result_card_is_pinned(self):
+        card = ROOT / "assets/qwen38-huihui-radixark-result.png"
+        self.assertEqual(
+            hashlib.sha256(card.read_bytes()).hexdigest(),
+            "6809548c2548abd5d961739e04fb67fa57d4e96c0550e913894b00e51cff90b2",
+        )
+        self.assertFalse((ROOT / "scripts/render_card.py").exists())
         comparison = json.loads((ROOT / "evidence/cross-study-comparison.json").read_text())
         target = comparison["systems"]["huihui_radixark"]
-        self.assertIn("github.com/sxuff/qwen38-huihui-abliterated-dflash2-dgx-spark", renderer)
         self.assertEqual(
             target["target"],
             "edp1096/Huihui-RadixArk-Qwen3.8-27B-abliterated-NVFP4",
@@ -84,6 +88,12 @@ class PrimaryResultTests(unittest.TestCase):
         self.assertIn("12.31 tok/s to 57.95 tok/s", report[:1200])
         self.assertIn("4.71×", report[:1200])
         self.assertIn("evidence/promotion-report-v3.md", report)
+        self.assertNotIn("acceptance", readme.lower())
+        self.assertNotIn("acceptance", report.lower())
+        self.assertIn(
+            "github.com/sxuff/qwen38-huihui-abliterated-dflash2-dgx-spark",
+            readme,
+        )
 
 
 if __name__ == "__main__":

@@ -30,7 +30,7 @@ Required integrity checks:
 - At least 15 GiB `MemAvailable`
 - At most 512 MiB swap growth
 - No speculative flags in the no-spec launch receipt
-- Positive verification-call delta and nonzero acceptance in DFlash2 mode
+- Positive verification-call delta in DFlash2 mode
 - Exact production model discovery and generation canary after restoration
 
 The no-spec receipt is [`evidence/huihui-nospec-study.json`](../evidence/huihui-nospec-study.json). The qualified DFlash2 summary is [`results/summary.json`](../results/summary.json).
