@@ -6,13 +6,9 @@ The target uses ModelOpt NVFP4 W4A4 for the `lm_head` and all 192 language-model
 
 ## Status
 
-**Qualified and deployed.** A matched-configuration no-spec follow-up now isolates the DFlash2 effect on the same Huihui-RadixArk target.
-
 ![Measured result](assets/qwen38-huihui-radixark-result.png)
 
 [Read the technical report](REPORT.md) · [Inspect the no-spec receipt](evidence/huihui-nospec-study.json) · [Inspect the exact comparison ledger](evidence/cross-study-comparison.json)
-
-Repository: https://github.com/sxuff/qwen38-huihui-abliterated-dflash2-dgx-spark
 
 | Huihui-RadixArk mode | Median whole-request rate | Frozen automatic quality | Runtime errors |
 |---|---:|---:|---:|

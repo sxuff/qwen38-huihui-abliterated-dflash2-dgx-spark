@@ -90,10 +90,8 @@ class PrimaryResultTests(unittest.TestCase):
         self.assertIn("evidence/promotion-report-v3.md", report)
         self.assertNotIn("acceptance", readme.lower())
         self.assertNotIn("acceptance", report.lower())
-        self.assertIn(
-            "github.com/sxuff/qwen38-huihui-abliterated-dflash2-dgx-spark",
-            readme,
-        )
+        self.assertNotIn("Repository:", readme)
+        self.assertNotIn("Qualified and deployed", readme)
 
 
 if __name__ == "__main__":
