@@ -6,27 +6,36 @@ The candidate quantizes the `lm_head` and all 192 language-model MLP projections
 
 ## Status
 
-**Promotion gate passed.** The exact historical runtime image, lineage-bound v3 collector, and all frozen gates produced **57.95 tok/s**, versus **41.44 tok/s** for the current Aday DFlash2 control.
+**Qualified and deployed.** The formal promotion gate used the exact-image Aday control and passed every frozen requirement. For the public speed comparison, the primary baseline is the measured stock RadixArk checkpoint, not Aday ARA.
 
 ![Measured result](assets/qwen38-huihui-radixark-result.png)
 
-| | Current Aday DFlash2 | Huihui-RadixArk DFlash2 |
-|---|---:|---:|
-| Median whole-request rate | 41.44 tok/s | **57.95 tok/s** |
-| Frozen automatic quality | 23/27 | **24/27** |
+| DFlash2 target | Median whole-request rate | Draft acceptance | Mean committed tokens per verification | Frozen automatic quality |
+|---|---:|---:|---:|---:|
+| Stock RadixArk | 57.11 tok/s | 42.14% | 3.95 | 24/27 |
+| **Huihui-RadixArk abliterated** | **57.95 tok/s** | **57.86%** | **5.05** | **24/27** |
+| Aday ARA abliterated, secondary reference | 41.44 tok/s | 70.71% | 5.95 | 23/27 |
 
-- Historical-control ratio: **1.40×**
+Huihui measured **1.46% above stock**, which is best described as **stock-level speed** because the runs came from separate study sessions and used different final image IDs. The **1.40×** figure applies only to Huihui versus the Aday ARA control.
+
+### Is 57.86% acceptance bad?
+
+No. SGLang defines acceptance rate as accepted draft tokens divided by proposed draft tokens, excluding the target model's bonus token. With eight configured DFlash tokens, seven are draft proposals. Huihui accepted an average of **4.05 of those seven drafts**, then committed the target bonus token, for **5.05 output tokens per verification step**.
+
+Acceptance is an efficiency diagnostic, not a quality score or a request-success rate. Huihui's **57.86%** is 15.71 percentage points above stock's **42.14%**, while its whole-request throughput is effectively tied with stock. Aday ARA reached a higher **70.71%** acceptance rate but only **41.44 tok/s**, showing why acceptance cannot be interpreted alone. End-to-end speed also depends on target-model execution cost, draft overhead, response trajectories, kernels, and memory behavior.
+
+Operational evidence for Huihui:
+
 - Runtime errors: **0/27**
 - Exact response-model identity: **27/27**
-- Normalized payload matches: **27/27**
+- Normalized payload matches against the formal Aday control: **27/27**
 - Measured DFlash verification-call delta: **1,310**
-- Final draft acceptance: **57.86%**, acceptance length **5.05**
 - Minimum host `MemAvailable`: **27.76 GiB**
 - Swap growth: **0 bytes**
 
-Only the fast DFlash2 arm will be collected. The control is the completed, output-redacted Aday DFlash2 arm from [`sxuff/qwen38-27b-abliterated-nvfp4-dflash2-dgx-spark`](https://github.com/sxuff/qwen38-27b-abliterated-nvfp4-dflash2-dgx-spark), pinned in [`controls/aday-dflash2-control.json`](controls/aday-dflash2-control.json).
+The exact post-hoc stock, Huihui, and Aday values and source-summary hashes are in [`evidence/cross-study-comparison.json`](evidence/cross-study-comparison.json). Stock and Huihui used identical fixture bytes, sampler settings, DFlash2 draft revision, SGLang base commit, base image digest, and overlay file hashes. Their final image IDs and collection sessions differ, so the stock comparison is a public reference rather than the preregistered promotion control.
 
-This is a historical-control comparison, not a same-session paired experiment. It cannot isolate run-order or environmental drift.
+The formal control remains the completed, output-redacted Aday DFlash2 arm from [`sxuff/qwen38-27b-abliterated-nvfp4-dflash2-dgx-spark`](https://github.com/sxuff/qwen38-27b-abliterated-nvfp4-dflash2-dgx-spark), pinned in [`controls/aday-dflash2-control.json`](controls/aday-dflash2-control.json). It preserves the original promotion decision without making Aday the headline baseline.
 
 ## Frozen promotion gates
 

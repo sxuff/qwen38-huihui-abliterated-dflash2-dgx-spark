@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "label": "posthoc_cross_study_reference",
+  "metric": "median whole-request completion tokens per second across the 18 declared performance rows",
+  "fixture_sha256": "786ea8c37b8f37cef3f306c9a73b0432efacefb7619167ccd62e5075eddb931c",
+  "draft": {
+    "model": "z-lab/Qwen3.8-27B-DFlash2",
+    "revision": "50307d4c4cde6860d4eee73e2547cd786fe8e8a4",
+    "configured_draft_tokens": 8,
+    "proposed_drafts_per_verification": 7
+  },
+  "systems": {
+    "stock_radixark": {
+      "target": "RadixArk/Qwen3.8-27B-NVFP4",
+      "target_revision": "52d1adc5f38aa5ebf099c29ed7025ba34cfbb854",
+      "runtime_image_id": "sha256:46d87859f1983604130eaf2d471a62cf4515e4de90aef0d24c9ffe74aa0911ff",
+      "summary_sha256": "b689cc73e90be78f08e0cb9e1a871dca70b769829166e0df1652b87a2e4d26c1",
+      "median_whole_request_tokens_per_second": 57.11193770023702,
+      "quality_passes": 24,
+      "quality_rows": 27,
+      "spec_accept_rate": 0.42142857142857143,
+      "accepted_drafts_per_verification": 2.95,
+      "spec_accept_length_including_bonus": 3.95
+    },
+    "aday_ara": {
+      "target": "aday777/Qwen3.8-27B-ARA-abliterated-NVFP4-MTP",
+      "target_revision": "16b43988bddfbe3ae0fd172c02c4ad9099c678de",
+      "runtime_image_id": "sha256:d551df08e966aee2fbac67c231f4c7dfad291b02d3b5e59f082f753c85cd33dd",
+      "summary_sha256": "dc6dab7ea65d52ba5243b2272c33d73fbb3b9bdc1e14e114ed10e0dc1e18e4df",
+      "median_whole_request_tokens_per_second": 41.43505141917612,
+      "quality_passes": 23,
+      "quality_rows": 27,
+      "spec_accept_rate": 0.7071428571428572,
+      "accepted_drafts_per_verification": 4.95,
+      "spec_accept_length_including_bonus": 5.95
+    },
+    "huihui_radixark": {
+      "target": "edp1096/Huihui-RadixArk-Qwen3.8-27B-abliterated-NVFP4",
+      "target_revision": "21565d389fe573a32c1c425e0c7ade204ddb2263",
+      "runtime_image_id": "sha256:d551df08e966aee2fbac67c231f4c7dfad291b02d3b5e59f082f753c85cd33dd",
+      "summary_sha256": "d8eaa81a949f461eb65b5ffaa76f4986c34365dbc8d5932d2a904fe672165e5a",
+      "median_whole_request_tokens_per_second": 57.94819602426378,
+      "quality_passes": 24,
+      "quality_rows": 27,
+      "spec_accept_rate": 0.5785714285714286,
+      "accepted_drafts_per_verification": 4.05,
+      "spec_accept_length_including_bonus": 5.05
+    }
+  },
+  "derived": {
+    "huihui_vs_stock_rate_ratio": 1.0146424435538508,
+    "huihui_vs_stock_rate_percent": 1.4642443553850804,
+    "huihui_vs_stock_acceptance_percentage_points": 15.714285714285719,
+    "huihui_vs_ara_rate_ratio": 1.3985308100147642,
+    "huihui_vs_ara_rate_percent": 39.85308100147642,
+    "huihui_vs_ara_acceptance_percentage_points": -12.857142857142856
+  },
+  "claim_boundary": "Stock is the primary public speed reference. Stock and Huihui used the same GB10 hardware class, fixture bytes, sampler, DFlash2 draft revision, SGLang base commit, base image digest, and overlay file hashes, but their final image IDs and collection sessions differ. The measured 1.46% Huihui lead is therefore best described as stock-level speed, not a controlled speedup. Aday ARA remains the exact-image frozen promotion control and a secondary operational reference."
+}
