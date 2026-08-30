@@ -1,20 +1,52 @@
 # Experimental protocol
 
-This repository runs one new DFlash2 candidate arm on one NVIDIA GB10 and compares it with an immutable historical DFlash2 control.
+## Primary operator question
 
-- Candidate: exact `edp1096/Huihui-RadixArk-Qwen3.8-27B-abliterated-NVFP4` revision in `manifests/target.json`.
-- Historical control: exact output-redacted Aday DFlash2 rows in `controls/aday-dflash2-control.json`.
-- Runtime control: candidate and historical arm use exact image ID `sha256:d551df08e966aee2fbac67c231f4c7dfad291b02d3b5e59f082f753c85cd33dd`.
-- DFlash2 draft, fixtures, sampler, request count, and metric definition match the prior arm.
-- Payload equivalence removes only the required `model` request field. Full hashes must differ because the served model identifiers differ.
-- Candidate collection: three repetitions across nine fixtures, 27 rows total.
-- Performance aggregate: exactly 18 finite positive rows across copy-Python, copy-JSON, code, JSON, math, and prose.
-- Every row must have positive completion tokens, an expected finish reason, a raw-stream digest, and the exact candidate response-model alias.
-- DFlash activation requires a positive verification-call delta between metrics captured immediately before and after the 27 measured requests.
-- Safety: at least 15 GiB `MemAvailable`; at most 512 MiB swap growth.
-- Promotion: at least 1.10× the historical median, at least 23/27 automatic-quality passes, no errors, all lineage and denominator gates, matching normalized payload hashes, active measured DFlash2, and passed memory gates.
-- Displaced service: exact model discovery and generation canary before stop, then exact identity and generation canary after restoration.
+How much does SGLang + DFlash2 accelerate the same abliterated Huihui-RadixArk NVFP4 target on one NVIDIA GB10?
 
-This design intentionally avoids rerunning no-spec. It answers the operator question: does the fuller ModelOpt NVFP4 target materially beat the currently deployed DFlash2 target? It does not estimate the candidate's no-spec speedup and is not a same-session paired comparison.
+The public result combines two configuration-matched sessions:
 
-The machine-readable frozen contract is [`protocol.json`](../protocol.json).
+- No speculation: **12.31 tok/s**
+- SGLang + DFlash2: **57.95 tok/s**
+- Ratio: **4.71×**
+
+The no-spec follow-up held the following constant:
+
+- Exact target checkpoint and revision
+- Exact runtime image ID
+- Exact fixture bytes and sampler
+- Exact context, memory, attention, Mamba, and scheduler settings
+- Exact served-model identity and request count
+
+The treatment removed the speculative algorithm, draft path, and draft-token flags. Both sessions used three repetitions across nine fixtures, with 27 rows and 18 declared performance rows. The sessions were collected separately, so the ratio is a matched-configuration historical-session comparison rather than a same-session paired estimate.
+
+Required integrity checks:
+
+- 27/27 unique requests complete with zero runtime errors
+- Exactly 18 finite positive performance rows
+- Positive completion-token counts and expected finish reasons
+- Exact served-model identity in every stream
+- At least 23/27 frozen automatic-quality passes
+- At least 15 GiB `MemAvailable`
+- At most 512 MiB swap growth
+- No speculative flags in the no-spec launch receipt
+- Positive verification-call delta and nonzero acceptance in DFlash2 mode
+- Exact production model discovery and generation canary after restoration
+
+The no-spec receipt is [`evidence/huihui-nospec-study.json`](../evidence/huihui-nospec-study.json). The qualified DFlash2 summary is [`results/summary.json`](../results/summary.json).
+
+## Supporting qualification protocol
+
+The original frozen protocol asked whether the fuller Huihui ModelOpt NVFP4 target materially beat the deployed Aday DFlash2 target. It intentionally collected one new DFlash2 arm against an immutable historical control:
+
+- Candidate: exact `edp1096/Huihui-RadixArk-Qwen3.8-27B-abliterated-NVFP4` revision in `manifests/target.json`
+- Historical control: output-redacted Aday DFlash2 rows in `controls/aday-dflash2-control.json`
+- Runtime control: exact shared image ID `sha256:d551df08e966aee2fbac67c231f4c7dfad291b02d3b5e59f082f753c85cd33dd`
+- Matching DFlash2 draft, fixtures, sampler, request count, and metric definition
+- Payload equivalence after removing only the required `model` request field
+- Positive DFlash verification-call delta during measured rows
+- Promotion threshold: at least 1.10× the historical median and at least 23/27 quality passes
+
+That study measured **41.44 tok/s to 57.95 tok/s** and passed every frozen gate. Its machine-readable contract remains [`protocol.json`](../protocol.json), and its original generated report is preserved at [`evidence/promotion-report-v3.md`](../evidence/promotion-report-v3.md).
+
+The supporting qualification explains why the checkpoint was promoted. The primary repository claim is now the same-target **12.31 to 57.95 tok/s, 4.71×** DFlash2 acceleration.

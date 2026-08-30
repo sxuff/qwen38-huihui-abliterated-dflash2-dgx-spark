@@ -1,14 +1,16 @@
 # Qwen3.8-27B Huihui abliterated NVFP4-lm_head + DFlash2 on one DGX Spark
 
-A pinned, single-arm validation of `edp1096/Huihui-RadixArk-Qwen3.8-27B-abliterated-NVFP4` with the same SGLang + DFlash2 runtime previously exercised on the ARA-abliterated checkpoint.
+A pinned DGX Spark recipe showing that SGLang + DFlash2 raises the same abliterated `edp1096/Huihui-RadixArk-Qwen3.8-27B-abliterated-NVFP4` target from **12.31 tok/s to 57.95 tok/s**, a measured **4.71×** whole-request acceleration.
 
-The candidate quantizes the `lm_head` and all 192 language-model MLP projections to NVFP4 W4A4. The earlier Aday artifact kept its `lm_head` in BF16. This study tests whether the fuller ModelOpt packing recovers DFlash2 throughput without regressing the frozen automatic-quality workload.
+The target uses ModelOpt NVFP4 W4A4 for the `lm_head` and all 192 language-model MLP projections, FP8 for attention and Gated DeltaNet projections, and BF16 for vision and MTP tensors. The repository packages the exact runtime, artifact verification, benchmark fixtures, safety gates, authenticated deployment, and rollback receipts used on one NVIDIA GB10.
 
 ## Status
 
 **Qualified and deployed.** A matched-configuration no-spec follow-up now isolates the DFlash2 effect on the same Huihui-RadixArk target.
 
 ![Measured result](assets/qwen38-huihui-radixark-result.png)
+
+[Read the technical report](REPORT.md) · [Inspect the no-spec receipt](evidence/huihui-nospec-study.json) · [Inspect the exact comparison ledger](evidence/cross-study-comparison.json)
 
 | Huihui-RadixArk mode | Median whole-request rate | Frozen automatic quality | Runtime errors |
 |---|---:|---:|---:|
@@ -98,16 +100,19 @@ python3 scripts/download.py draft \
 
 Every expected file, byte count, and SHA-256 digest is frozen in `manifests/` and checked before launch.
 
-## Run the one-arm validation
+## Reproduce the 4.71× comparison
+
+The checked-in DFlash2 arm is the qualified 27-request result in `results/summary.json`. Re-run the same target without speculative decoding and compare it with that frozen arm:
 
 ```bash
 MODEL_DIR=/path/to/candidate/snapshot \
-DRAFT_DIR=/path/to/pinned/dflash2/draft \
-RUN_ROOT="$PWD/private/primary" \
-./scripts/run_study.sh
+RUN_ROOT="$PWD/private/no-spec-followup" \
+./scripts/run_nospec_followup.sh
 ```
 
-The runner temporarily stops the current Aday model, launches the candidate under a disjoint study-owned container name, collects only `candidate-dflash2`, then restores and generation-tests the previous authenticated service regardless of pass or failure. Promotion is a separate, reversible step.
+The follow-up runner verifies the contract, image, and checkpoint; generation-tests any active Huihui production service; stops it; launches the same target with no speculative flags; collects 27 requests under the memory watchdog; calculates the DFlash2 ratio; then restores and generation-tests production. It refuses to overwrite an existing result and only removes its exactly owned study container.
+
+The original one-arm promotion harness remains in `scripts/run_study.sh` for provenance with its frozen Aday control, protocol, and report. It is supporting qualification machinery, not the primary reproduction path. The primary technical report is [`REPORT.md`](REPORT.md); the original promotion report is preserved at [`evidence/promotion-report-v3.md`](evidence/promotion-report-v3.md).
 
 ## Install the qualified service
 
