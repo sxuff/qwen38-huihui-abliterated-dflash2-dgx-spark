@@ -18,11 +18,17 @@ The no-spec follow-up used the exact qualified image, checkpoint, fixture bytes,
 - Measured verification-call delta across the DFlash arm: **1,310**
 - Complete requests: **27/27 per arm**
 - Automatic quality: **24/27 in both modes**
+- Assembled assistant-envelope byte parity: **9/27**
+- Visible-content byte parity: **12/27**
+- Completion-token count parity: **15/27**
+- Exact token-ID parity: **unmeasured**, because output token IDs were not retained
 - Runtime errors: **0 in both modes**
 - Maximum swap growth: **0 bytes in both measured arms**
 - No-spec launch receipt: no speculative algorithm or draft-model flags
 
 With eight configured DFlash tokens, seven are draft proposals. The measured acceptance rate corresponds to 4.05 accepted draft tokens plus one target bonus token per verification step. Acceptance is an efficiency diagnostic, not a quality score.
+
+The equal 24/27 quality totals are aggregate checker outcomes, not a parity claim. Only 9/27 canonical assembled assistant envelopes matched byte-for-byte across the separately collected arms. The exact definition and component counts are in [`evidence/huihui-cross-arm-parity.json`](evidence/huihui-cross-arm-parity.json).
 
 ## Stock reference
 
@@ -43,6 +49,7 @@ The original machine-generated report is preserved at [`evidence/promotion-repor
 ## Evidence
 
 - [`evidence/huihui-nospec-study.json`](evidence/huihui-nospec-study.json): public-safe no-spec summary and restoration receipt
+- [`evidence/huihui-cross-arm-parity.json`](evidence/huihui-cross-arm-parity.json): assembled-output byte parity and token-ID limitation
 - [`results/summary.json`](results/summary.json): qualified DFlash2 candidate summary
 - [`evidence/cross-study-comparison.json`](evidence/cross-study-comparison.json): exact stock, Aday, and Huihui values with source hashes
 - [`evidence/qualification.json`](evidence/qualification.json): frozen promotion gates

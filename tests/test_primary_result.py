@@ -37,6 +37,21 @@ class PrimaryResultTests(unittest.TestCase):
             places=12,
         )
 
+    def test_cross_arm_parity_is_explicitly_bounded(self):
+        parity_path = ROOT / "evidence/huihui-cross-arm-parity.json"
+        parity = json.loads(parity_path.read_text())
+        comparison = json.loads((ROOT / "evidence/cross-study-comparison.json").read_text())
+        receipt = comparison["parity_receipt"]
+        self.assertEqual(hashlib.sha256(parity_path.read_bytes()).hexdigest(), receipt["sha256"])
+        self.assertEqual(parity["rows"], 27)
+        self.assertEqual(parity["normalized_payload_matches"], 27)
+        self.assertEqual(parity["assembled_assistant_envelope_byte_matches"], 9)
+        self.assertEqual(parity["visible_content_byte_matches"], 12)
+        self.assertEqual(parity["completion_token_count_matches"], 15)
+        self.assertEqual(parity["token_id_parity"], "unmeasured")
+        self.assertIn("24/27", parity["claim_boundary"])
+        self.assertIn("9/27", parity["claim_boundary"])
+
     def test_public_followup_runner_uses_no_spec_launch(self):
         script = (ROOT / "scripts/run_nospec_followup.sh").read_text()
         launch = script.split("args=(", 1)[1].split("\nid=", 1)[0]
@@ -46,6 +61,20 @@ class PrimaryResultTests(unittest.TestCase):
         self.assertIn("restore_production", script)
         self.assertIn("watchdog.py", script)
         self.assertIn("refusing to overwrite", script)
+
+    def test_result_card_binds_repo_and_target(self):
+        renderer = (ROOT / "scripts/render_card.py").read_text()
+        comparison = json.loads((ROOT / "evidence/cross-study-comparison.json").read_text())
+        target = comparison["systems"]["huihui_radixark"]
+        self.assertIn("github.com/sxuff/qwen38-huihui-abliterated-dflash2-dgx-spark", renderer)
+        self.assertEqual(
+            target["target"],
+            "edp1096/Huihui-RadixArk-Qwen3.8-27B-abliterated-NVFP4",
+        )
+        self.assertEqual(
+            target["target_revision"],
+            "21565d389fe573a32c1c425e0c7ade204ddb2263",
+        )
 
     def test_public_landing_pages_lead_with_primary_result(self):
         readme = (ROOT / "README.md").read_text()

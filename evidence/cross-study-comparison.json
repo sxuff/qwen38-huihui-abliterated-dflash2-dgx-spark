@@ -2,6 +2,13 @@
   "schema_version": 1,
   "label": "posthoc_cross_study_reference",
   "metric": "median whole-request completion tokens per second across the 18 declared performance rows",
+  "parity_receipt": {
+    "path": "evidence/huihui-cross-arm-parity.json",
+    "sha256": "a781a5b4d4232c73a3f3028d1d976be883f4bc428741e97f7d4a52d712571cfb",
+    "assembled_assistant_envelope_byte_matches": 9,
+    "rows": 27,
+    "token_id_parity": "unmeasured"
+  },
   "fixture_sha256": "786ea8c37b8f37cef3f306c9a73b0432efacefb7619167ccd62e5075eddb931c",
   "draft": {
     "model": "z-lab/Qwen3.8-27B-DFlash2",

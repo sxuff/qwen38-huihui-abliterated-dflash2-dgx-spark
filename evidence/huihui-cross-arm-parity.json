@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "comparison": "Huihui-RadixArk no speculation versus SGLang + DFlash2",
+  "collection": "configuration-matched separate sessions",
+  "fixture_sha256": "786ea8c37b8f37cef3f306c9a73b0432efacefb7619167ccd62e5075eddb931c",
+  "rows": 27,
+  "normalized_payload_matches": 27,
+  "finish_reason_matches": 27,
+  "completion_token_count_matches": 15,
+  "visible_content_byte_matches": 12,
+  "reasoning_text_matches": 24,
+  "tool_call_envelope_matches": 24,
+  "assembled_assistant_envelope_byte_matches": 9,
+  "assembled_assistant_envelope_definition": "Canonical UTF-8 JSON over final content, reasoning_content, tool_calls, and finish_reason, with sorted keys and compact separators.",
+  "token_id_parity": "unmeasured",
+  "token_id_parity_reason": "The frozen streaming harness retained final text, reasoning text, tool calls, usage, finish reason, event digests, and content hashes, but not endpoint-returned output token IDs.",
+  "quality_passes": {
+    "no_speculation": 24,
+    "dflash2": 24
+  },
+  "runtime_errors": {
+    "no_speculation": 0,
+    "dflash2": 0
+  },
+  "claim_boundary": "The equal 24/27 automatic-quality totals do not imply output parity. Only 9/27 assembled assistant envelopes were byte-identical across the separately collected, configuration-matched arms. Exact token-ID parity cannot be claimed because output token IDs were not retained."
+}

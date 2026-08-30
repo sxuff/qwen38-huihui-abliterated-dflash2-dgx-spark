@@ -19,6 +19,8 @@ The target uses ModelOpt NVFP4 W4A4 for the `lm_head` and all 192 language-model
 
 **Measured DFlash2 acceleration: 4.71×.** The no-spec follow-up used the exact qualified image, target, fixture bytes, sampler, and server settings with only the speculative-decoding flags removed. The no-spec and DFlash2 arms were collected in separate sessions, so this is a matched-configuration historical-session comparison rather than a same-session paired estimate.
 
+Equal automatic-quality totals do not imply output parity. **9/27 assembled assistant envelopes were byte-identical** across arms; visible content matched in 12/27 and completion-token counts matched in 15/27. Exact token-ID parity is unmeasured because the frozen streaming harness did not retain output token IDs. See [`evidence/huihui-cross-arm-parity.json`](evidence/huihui-cross-arm-parity.json).
+
 ### External references
 
 | Target | No speculation | SGLang + DFlash2 | DFlash2 ratio |
