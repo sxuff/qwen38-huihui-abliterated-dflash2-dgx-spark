@@ -6,34 +6,44 @@ The candidate quantizes the `lm_head` and all 192 language-model MLP projections
 
 ## Status
 
-**Qualified and deployed.** The formal promotion gate used the exact-image Aday control and passed every frozen requirement. For the public speed comparison, the primary baseline is the measured stock RadixArk checkpoint, not Aday ARA.
+**Qualified and deployed.** A matched-configuration no-spec follow-up now isolates the DFlash2 effect on the same Huihui-RadixArk target.
 
 ![Measured result](assets/qwen38-huihui-radixark-result.png)
 
-| DFlash2 target | Median whole-request rate | Draft acceptance | Mean committed tokens per verification | Frozen automatic quality |
-|---|---:|---:|---:|---:|
-| Stock RadixArk | 57.11 tok/s | 42.14% | 3.95 | 24/27 |
-| **Huihui-RadixArk abliterated** | **57.95 tok/s** | **57.86%** | **5.05** | **24/27** |
-| Aday ARA abliterated, secondary reference | 41.44 tok/s | 70.71% | 5.95 | 23/27 |
+| Huihui-RadixArk mode | Median whole-request rate | Frozen automatic quality | Runtime errors |
+|---|---:|---:|---:|
+| No speculation | 12.31 tok/s | 24/27 | 0/27 |
+| **SGLang + DFlash2** | **57.95 tok/s** | **24/27** | **0/27** |
 
-Huihui measured **1.46% above stock**, which is best described as **stock-level speed** because the runs came from separate study sessions and used different final image IDs. The **1.40×** figure applies only to Huihui versus the Aday ARA control.
+**Measured DFlash2 acceleration: 4.71×.** The no-spec follow-up used the exact qualified image, target, fixture bytes, sampler, and server settings with only the speculative-decoding flags removed. The no-spec and DFlash2 arms were collected in separate sessions, so this is a matched-configuration historical-session comparison rather than a same-session paired estimate.
+
+### External references
+
+| Target | No speculation | SGLang + DFlash2 | DFlash2 ratio |
+|---|---:|---:|---:|
+| Stock RadixArk | 12.34 tok/s | 57.11 tok/s | 4.63× |
+| **Huihui-RadixArk abliterated** | **12.31 tok/s** | **57.95 tok/s** | **4.71×** |
+| Aday ARA abliterated | 12.33 tok/s | 41.44 tok/s | 3.36× |
+
+Stock remains the primary external speed reference. Huihui's 57.95 tok/s is effectively stock-level performance, measuring 1.46% above stock across separate studies. Aday remains the exact-image frozen promotion control and a secondary operational reference.
 
 ### Is 57.86% acceptance bad?
 
 No. SGLang defines acceptance rate as accepted draft tokens divided by proposed draft tokens, excluding the target model's bonus token. With eight configured DFlash tokens, seven are draft proposals. Huihui accepted an average of **4.05 of those seven drafts**, then committed the target bonus token, for **5.05 output tokens per verification step**.
 
-Acceptance is an efficiency diagnostic, not a quality score or a request-success rate. Huihui's **57.86%** is 15.71 percentage points above stock's **42.14%**, while its whole-request throughput is effectively tied with stock. Aday ARA reached a higher **70.71%** acceptance rate but only **41.44 tok/s**, showing why acceptance cannot be interpreted alone. End-to-end speed also depends on target-model execution cost, draft overhead, response trajectories, kernels, and memory behavior.
+Acceptance is an efficiency diagnostic, not a quality score or a request-success rate. Huihui's **57.86%** is 15.71 percentage points above stock's **42.14%**. Aday reached a higher **70.71%** acceptance rate but only **41.44 tok/s**, showing why acceptance cannot be interpreted alone. End-to-end speed also depends on target-model execution cost, draft overhead, response trajectories, kernels, and memory behavior.
 
-Operational evidence for Huihui:
+Operational evidence for the no-spec follow-up:
 
+- Complete requests: **27/27**
+- Frozen automatic quality: **24/27**, matching DFlash2
 - Runtime errors: **0/27**
-- Exact response-model identity: **27/27**
-- Normalized payload matches against the formal Aday control: **27/27**
-- Measured DFlash verification-call delta: **1,310**
-- Minimum host `MemAvailable`: **27.76 GiB**
+- Speculative flags present: **false**
+- Minimum host `MemAvailable`: **31,633,780,736 bytes**
 - Swap growth: **0 bytes**
+- Production DFlash2 service restored and generation-tested
 
-The exact post-hoc stock, Huihui, and Aday values and source-summary hashes are in [`evidence/cross-study-comparison.json`](evidence/cross-study-comparison.json). Stock and Huihui used identical fixture bytes, sampler settings, DFlash2 draft revision, SGLang base commit, base image digest, and overlay file hashes. Their final image IDs and collection sessions differ, so the stock comparison is a public reference rather than the preregistered promotion control.
+The no-spec receipt is [`evidence/huihui-nospec-study.json`](evidence/huihui-nospec-study.json). The exact post-hoc stock, Huihui, and Aday values and source-summary hashes are in [`evidence/cross-study-comparison.json`](evidence/cross-study-comparison.json).
 
 The formal control remains the completed, output-redacted Aday DFlash2 arm from [`sxuff/qwen38-27b-abliterated-nvfp4-dflash2-dgx-spark`](https://github.com/sxuff/qwen38-27b-abliterated-nvfp4-dflash2-dgx-spark), pinned in [`controls/aday-dflash2-control.json`](controls/aday-dflash2-control.json). It preserves the original promotion decision without making Aday the headline baseline.
 

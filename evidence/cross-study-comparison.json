@@ -40,6 +40,19 @@
       "runtime_image_id": "sha256:d551df08e966aee2fbac67c231f4c7dfad291b02d3b5e59f082f753c85cd33dd",
       "summary_sha256": "d8eaa81a949f461eb65b5ffaa76f4986c34365dbc8d5932d2a904fe672165e5a",
       "median_whole_request_tokens_per_second": 57.94819602426378,
+      "no_spec_followup": {
+        "summary_path": "evidence/huihui-nospec-study.json",
+        "summary_sha256": "b3ea110bb6294b456a5c61494635bfbd254b1f64ec91e505068428e5e4a09ce8",
+        "median_whole_request_tokens_per_second": 12.31396941159294,
+        "dflash2_speedup_ratio": 4.7058908534975465,
+        "quality_passes": 24,
+        "quality_rows": 27,
+        "runtime_errors": 0,
+        "minimum_mem_available_bytes": 31633780736,
+        "maximum_swap_growth_bytes": 0,
+        "speculative_flags_present": false,
+        "production_restored": true
+      },
       "quality_passes": 24,
       "quality_rows": 27,
       "spec_accept_rate": 0.5785714285714286,
@@ -48,6 +61,8 @@
     }
   },
   "derived": {
+    "huihui_dflash2_vs_no_spec_ratio": 4.7058908534975465,
+    "huihui_dflash2_vs_no_spec_percent": 370.58908534975465,
     "huihui_vs_stock_rate_ratio": 1.0146424435538508,
     "huihui_vs_stock_rate_percent": 1.4642443553850804,
     "huihui_vs_stock_acceptance_percentage_points": 15.714285714285719,
@@ -55,5 +70,5 @@
     "huihui_vs_ara_rate_percent": 39.85308100147642,
     "huihui_vs_ara_acceptance_percentage_points": -12.857142857142856
   },
-  "claim_boundary": "Stock is the primary public speed reference. Stock and Huihui used the same GB10 hardware class, fixture bytes, sampler, DFlash2 draft revision, SGLang base commit, base image digest, and overlay file hashes, but their final image IDs and collection sessions differ. The measured 1.46% Huihui lead is therefore best described as stock-level speed, not a controlled speedup. Aday ARA remains the exact-image frozen promotion control and a secondary operational reference."
+  "claim_boundary": "The Huihui no-spec follow-up used the exact qualified image, target, fixture bytes, sampler, and server settings with speculative flags removed, then restored and generation-tested production. Its 12.31 tok/s result and the qualified 57.95 tok/s DFlash2 arm were collected in separate sessions, so 4.71x is a matched-configuration historical-session comparison rather than a same-session paired estimate. Stock remains the primary external speed reference. Stock and Huihui used the same GB10 hardware class, fixture bytes, sampler, DFlash2 draft revision, SGLang base commit, base image digest, and overlay file hashes, but their final image IDs and collection sessions differ. The measured 1.46% Huihui lead over stock is therefore best described as stock-level speed. Aday ARA remains the exact-image frozen promotion control and a secondary operational reference."
 }

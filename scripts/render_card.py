@@ -5,10 +5,9 @@ from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
 data = json.loads((ROOT / "evidence/cross-study-comparison.json").read_text())
-stock = data["systems"]["stock_radixark"]
 huihui = data["systems"]["huihui_radixark"]
-ara = data["systems"]["aday_ara"]
-delta = data["derived"]["huihui_vs_stock_rate_percent"]
+no_spec = huihui["no_spec_followup"]
+stock = data["systems"]["stock_radixark"]
 
 W, H = 1600, 900
 BG = "#08111f"
@@ -33,36 +32,50 @@ def text(x, y, value, size, color=WHITE, bold=False, anchor=None):
     d.text((x, y), value, font=font(size, bold), fill=color, anchor=anchor)
 
 
-def metric_panel(x1, x2, label, system, accent):
-    d.rounded_rectangle((x1, 270, x2, 650), radius=18, fill=PANEL, outline=BORDER, width=2)
-    d.rectangle((x1, 270, x2, 280), fill=accent)
-    text(x1 + 40, 315, label, 28, accent, True)
-    text(x1 + 40, 370, f'{system["median_whole_request_tokens_per_second"]:.2f}', 100, WHITE, True)
-    text(x1 + 44, 480, "TOK/S", 27, MUTED, True)
-    text(x1 + 40, 545, f'{system["spec_accept_rate"] * 100:.2f}% ACCEPTANCE', 27, WHITE, True)
-    text(x1 + 40, 590, f'{system["spec_accept_length_including_bonus"]:.2f} TOKENS / VERIFY', 25, MUTED, True)
+def metric_panel(x1, x2, label, rate, quality, accent):
+    d.rounded_rectangle((x1, 280, x2, 650), radius=18, fill=PANEL, outline=BORDER, width=2)
+    d.rectangle((x1, 280, x2, 290), fill=accent)
+    text(x1 + 40, 325, label, 29, accent, True)
+    text(x1 + 40, 385, f"{rate:.2f}", 102, WHITE, True)
+    text(x1 + 44, 495, "TOK/S", 27, MUTED, True)
+    text(x1 + 40, 560, f"QUALITY  {quality}/27", 27, WHITE, True)
+    text(x1 + 40, 605, "0 RUNTIME ERRORS", 23, MUTED, True)
 
 
 d.rectangle((72, 70, 88, 830), fill=GREEN)
-text(130, 82, "STOCK-LEVEL SPEED. ABLITERATED.", 48, WHITE, True)
-text(130, 150, "Qwen3.8-27B on 1× DGX Spark · SGLang + DFlash2", 29, MUTED)
-text(130, 205, "Primary public comparison", 24, GREEN, True)
+text(130, 80, "DFLASH2 MAKES ABLITERATED QWEN 4.71× FASTER", 43, WHITE, True)
+text(130, 145, "Same Huihui-RadixArk target · 1× DGX Spark · whole-request rate", 28, MUTED)
+text(130, 205, "Exact image and settings, speculative flags are the treatment", 23, GREEN, True)
 
-metric_panel(130, 720, "STOCK RADIXARK", stock, BLUE)
-metric_panel(880, 1470, "HUIHUI-RADIXARK", huihui, GREEN)
+metric_panel(
+    130,
+    720,
+    "NO SPECULATION",
+    no_spec["median_whole_request_tokens_per_second"],
+    no_spec["quality_passes"],
+    BLUE,
+)
+metric_panel(
+    880,
+    1470,
+    "SGLANG + DFLASH2",
+    huihui["median_whole_request_tokens_per_second"],
+    huihui["quality_passes"],
+    GREEN,
+)
 
-text(800, 465, f"+{delta:.2f}%", 42, WHITE, True, "mm")
-text(800, 515, "MEASURED", 18, MUTED, True, "mm")
+text(800, 455, f'{no_spec["dflash2_speedup_ratio"]:.2f}×', 48, WHITE, True, "mm")
+text(800, 515, "SPEEDUP", 18, MUTED, True, "mm")
 
-# Secondary ARA reference strip.
-d.rounded_rectangle((130, 690, 1470, 790), radius=14, fill="#101a28", outline=BORDER, width=2)
-text(165, 716, "ARA REFERENCE", 23, AMBER, True)
-text(410, 716, f'{ara["median_whole_request_tokens_per_second"]:.2f} tok/s', 24, WHITE, True)
-text(700, 716, f'{ara["spec_accept_rate"] * 100:.2f}% acceptance', 24, WHITE, True)
-text(1040, 716, f'{ara["spec_accept_length_including_bonus"]:.2f} tokens / verify', 24, WHITE, True)
-text(165, 755, "Higher acceptance, lower end-to-end speed", 20, MUTED)
+# Compact receipts.
+d.rounded_rectangle((130, 690, 1470, 795), radius=14, fill="#101a28", outline=BORDER, width=2)
+text(165, 713, "DFLASH RECEIPT", 22, AMBER, True)
+text(415, 713, f'{huihui["spec_accept_rate"] * 100:.2f}% acceptance', 23, WHITE, True)
+text(735, 713, f'{huihui["spec_accept_length_including_bonus"]:.2f} tokens / verify', 23, WHITE, True)
+text(1080, 713, "0 bytes swap growth", 23, WHITE, True)
+text(165, 755, f'Stock reference: 12.34 → {stock["median_whole_request_tokens_per_second"]:.2f} tok/s, 4.63×', 21, MUTED)
 
-text(130, 825, "Separate study sessions · identical fixture bytes and DFlash2 draft · whole-request completion rate", 21, MUTED)
+text(130, 825, "27 requests per arm · matched configuration · separate collection sessions · production restored", 21, MUTED)
 
 out = ROOT / "assets/qwen38-huihui-radixark-result.png"
 out.parent.mkdir(exist_ok=True)

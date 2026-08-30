@@ -1,0 +1,94 @@
+{
+  "dflash2_median_whole_request_tokens_per_second": 57.94819602426378,
+  "dflash2_speedup_ratio": 4.7058908534975465,
+  "errors": 0,
+  "fixtures_sha256": "786ea8c37b8f37cef3f306c9a73b0432efacefb7619167ccd62e5075eddb931c",
+  "image_id": "sha256:d551df08e966aee2fbac67c231f4c7dfad291b02d3b5e59f082f753c85cd33dd",
+  "maximum_swap_growth_bytes": 0,
+  "minimum_mem_available_bytes": 31633780736,
+  "model": "qwen38-27b-huihui-radixark-abliterated-nvfp4",
+  "no_spec_median_whole_request_tokens_per_second": 12.31396941159294,
+  "per_fixture": {
+    "code": {
+      "median_whole_request_tokens_per_second": 12.381477605299137,
+      "quality_passes": 3,
+      "rows": 3
+    },
+    "copy_json": {
+      "median_whole_request_tokens_per_second": 12.363777837679889,
+      "quality_passes": 3,
+      "rows": 3
+    },
+    "copy_python": {
+      "median_whole_request_tokens_per_second": 12.316270258565531,
+      "quality_passes": 3,
+      "rows": 3
+    },
+    "json": {
+      "median_whole_request_tokens_per_second": 11.99517238335377,
+      "quality_passes": 3,
+      "rows": 3
+    },
+    "literal": {
+      "median_whole_request_tokens_per_second": 9.660906598302722,
+      "quality_passes": 3,
+      "rows": 3
+    },
+    "math": {
+      "median_whole_request_tokens_per_second": 12.36129842946327,
+      "quality_passes": 3,
+      "rows": 3
+    },
+    "prose": {
+      "median_whole_request_tokens_per_second": 12.211993987237522,
+      "quality_passes": 0,
+      "rows": 3
+    },
+    "reasoning": {
+      "median_whole_request_tokens_per_second": 12.270854524420514,
+      "quality_passes": 3,
+      "rows": 3
+    },
+    "tool": {
+      "median_whole_request_tokens_per_second": 11.507620760869145,
+      "quality_passes": 3,
+      "rows": 3
+    }
+  },
+  "performance_rows": 18,
+  "production_restored": true,
+  "protocol_sha256": "a07dbbab5571f1d4e2c2404b2e42a5a20eac3259884ed8d9cde09498e99b9ab1",
+  "quality_passes": 24,
+  "restoration_receipt": {
+    "canary": {
+      "content": "HUIHUI_DFLASH2_RESTORED",
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 11,
+        "prompt_tokens": 25,
+        "prompt_tokens_details": null,
+        "reasoning_tokens": 0,
+        "total_tokens": 36
+      }
+    },
+    "expected_model": "qwen38-27b-huihui-radixark-abliterated-nvfp4",
+    "models": {
+      "data": [
+        {
+          "created": 1788082250,
+          "id": "qwen38-27b-huihui-radixark-abliterated-nvfp4",
+          "max_model_len": 262144,
+          "object": "model",
+          "owned_by": "sglang",
+          "parent": null,
+          "root": "qwen38-27b-huihui-radixark-abliterated-nvfp4"
+        }
+      ],
+      "object": "list"
+    }
+  },
+  "rows": 27,
+  "schema_version": 1,
+  "speculative_flags_present": false,
+  "study": "matched_huihui_no_spec_vs_qualified_dflash2"
+}
