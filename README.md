@@ -1,5 +1,13 @@
 # Qwen3.8-27B Huihui abliterated NVFP4-lm_head + DFlash2 on one DGX Spark
 
+## Run it
+
+```bash
+git clone https://github.com/sxuff/qwen38-huihui-abliterated-dflash2-dgx-spark && cd qwen38-huihui-abliterated-dflash2-dgx-spark && ./run.sh
+```
+
+Expected: **57.95 tok/s** median whole-request completion rate, single stream, prefill included (12.31 tok/s without DFlash2) — receipt: [`evidence/huihui-nospec-study.json`](evidence/huihui-nospec-study.json)
+
 A pinned DGX Spark recipe showing that SGLang + DFlash2 raises the same abliterated `edp1096/Huihui-RadixArk-Qwen3.8-27B-abliterated-NVFP4` target from **12.31 tok/s to 57.95 tok/s**, a measured **4.71×** whole-request acceleration.
 
 The target uses ModelOpt NVFP4 W4A4 for the `lm_head` and all 192 language-model MLP projections, FP8 for attention and Gated DeltaNet projections, and BF16 for vision and MTP tensors. The repository packages the exact runtime, artifact verification, benchmark fixtures, safety gates, authenticated deployment, and rollback receipts used on one NVIDIA GB10.
